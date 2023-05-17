@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="bg-[#e9edc9] min-h-screen">
       <Header/>
-      <main className="pt-6 mx-auto max-w-[616px] ">
+      <main className="pt-6 mx-auto max-w-[900px] ">
       <GameTitle/>
       <GameInfo className="mt-4"/>
       </main>
