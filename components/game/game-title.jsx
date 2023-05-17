@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { ArrowLeftIcon } from "./icons/arrow-left-icon";
+import { StarIcon } from "./icons/star-icon";
+import { UserIcon } from "./icons/user-icon";
+import { HistoryIcon } from "./icons/history-icon";
 
 export function GameTitle() {
     return (
@@ -8,7 +11,18 @@ export function GameTitle() {
             <ArrowLeftIcon/>
                 To main
             </Link>
-            <h1 className="text-4xl leading-tight">Крестики нолики</h1>
+            <h1 className="text-4xl leading-tight pb-3">Крестики нолики</h1>
+            <div className="flex items-center gap-7 text-2xl">
+                <StarIcon/>
+                <div className="flex items-center gap-1">
+                <UserIcon/>
+                2
+                </div>
+                <div className="flex items-center gap-1">
+                <HistoryIcon/>
+                1 minute to go
+                </div>
+            </div>
         </div>
     )
 }
