@@ -1,18 +1,18 @@
-import { clsx } from "clsx";
-import { SYMBOL_O, SYMBOL_X } from "./constants";
 
-export function GameSymbol({ symbol }) {
-  return (
-    <span
-      className={clsx(
-        "text-xl",
-        {
-          [SYMBOL_O]: "text-green-400",
-          [SYMBOL_X]: "text-red-400",
-        }[symbol]
-      )}
-    >
-      {symbol}
-    </span>
-  );
+import { GAME_SYMBOLS } from "./constants";
+import { CrossIcon } from "./icons/cross-icon";
+import { SquareIcon } from "./icons/square-icon";
+import { TringleIcon } from "./icons/tringle-icon";
+import { ZeroIcon } from "./icons/zero-icon";
+
+export function GameSymbol({ symbol, className }) {
+  const Icon =
+    {
+      [GAME_SYMBOLS.CROSS]: CrossIcon,
+      [GAME_SYMBOLS.ZERO]: ZeroIcon,
+      [GAME_SYMBOLS.TRINGLE]: TringleIcon,
+      [GAME_SYMBOLS.SQUARE]: SquareIcon,
+    }[symbol] ?? CrossIcon;
+
+  return <Icon className={className} />;
 }
