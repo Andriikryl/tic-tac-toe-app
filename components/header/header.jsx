@@ -14,7 +14,7 @@ export function Header () {
             <div className="w-px h-8 bg-red-700 mx-6"></div>
             <UiButton className="w-44" variant="primary" size="lg">Play</UiButton>
             <button className="ml-auto flex items-center gap-4 p-2 rounded-lg bg-opacity-60 backdrop-filter backdrop-blur-lg bg-white shadow">
-            <Profile/>
+            <Profile name="Antonio" rating="666"/>
             <ArrowDownIcon/>
             </button>
         </header>

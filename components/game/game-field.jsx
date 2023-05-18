@@ -4,17 +4,10 @@ import { GameSymbol } from "./game-symbol"
 import { useGameState } from "./use-game-state"
 
 
-
-
-
-
-
 export function GameField({className}) {
 
     const {cells, currentMove, handleCellClick, nextMove} = useGameState()
     
-
-
     const actions = <>
                 <UiButton size="md" variant="primary">Path</UiButton>
                 <UiButton size="md" variant="outline" >zdatcy</UiButton>   
