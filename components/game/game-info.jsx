@@ -7,6 +7,7 @@ import avatarSrc1 from "./images/avatar-1.png";
 import avatarSrc2 from "./images/avatar-2.png";
 import avatarSrc3 from "./images/avatar-3.png";
 import avatarSrc4 from "./images/avatar-4.png";
+import { useEffect, useState } from "react";
 
 const players = [
   {id:1, name: "John", rating: 666, avatar: avatarSrc1, symbol: GAME_SYMBOLS.CROSS},
@@ -35,6 +36,19 @@ export function GameInfo({ className, playersCount }) {
 }
 
 function PlayerInfo({ playerInfo, isRight }) {
+
+  const [seconds, setSeconds] = useState(6);
+
+  const minutesString =  String(Math.floor(seconds / 60)).padStart(2, "0");
+  const secondsString = String(seconds % 60).padStart(2, "0")
+  const isDanges = seconds < 10;
+
+  useEffect(() => {
+    setInterval(() => {
+        setSeconds((s) => Math.max(s - 1, 0))
+    }, 1000)
+  }, [])
+
   return (
     <div className="flex gap-3 items-center">
       <div className={clsx("relative", isRight && "order-3")}>
@@ -51,11 +65,12 @@ function PlayerInfo({ playerInfo, isRight }) {
       <div className={clsx("h-6 w-px bg-slate-200", isRight && "order-2")} />
       <div
         className={clsx(
-          "text-slate-900 text-lg font-semibold",
-          isRight && "order-1"
+          "text-lg font-semibold",
+          isRight && "order-1",
+          isDanges ? 'text-orange-600 ' : 'text-slate-900 '
         )}
       >
-        01:08
+        {minutesString}:{secondsString}
       </div>
     </div>
   );
