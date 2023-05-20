@@ -10,13 +10,37 @@ import avatarSrc4 from "./images/avatar-4.png";
 import { useEffect, useState } from "react";
 
 const players = [
-  {id:1, name: "John", rating: 666, avatar: avatarSrc1, symbol: GAME_SYMBOLS.CROSS},
-  {id:1, name: "John", rating: 777, avatar: avatarSrc2, symbol: GAME_SYMBOLS.CROSS},
-  {id:1, name: "John", rating: 888, avatar: avatarSrc3, symbol: GAME_SYMBOLS.CROSS},
-  {id:1, name: "John", rating: 999, avatar: avatarSrc4, symbol: GAME_SYMBOLS.CROSS},
-]
+  {
+    id: 1,
+    name: "Paromovevg",
+    rating: 1230,
+    avatar: avatarSrc1,
+    symbol: GAME_SYMBOLS.CROSS,
+  },
+  {
+    id: 2,
+    name: "VereIntedinglapotur",
+    rating: 850,
+    avatar: avatarSrc2,
+    symbol: GAME_SYMBOLS.ZERO,
+  },
+  {
+    id: 3,
+    name: "Lara",
+    rating: 1400,
+    avatar: avatarSrc3,
+    symbol: GAME_SYMBOLS.TRINGLE,
+  },
+  {
+    id: 4,
+    name: "Додик",
+    rating: 760,
+    avatar: avatarSrc4,
+    symbol: GAME_SYMBOLS.SQUARE,
+  },
+];
 
-export function GameInfo({ className, playersCount }) {
+export function GameInfo({ className, playersCount, currentMove }) {
   return (
     <div
       className={clsx(
@@ -29,25 +53,40 @@ export function GameInfo({ className, playersCount }) {
           key={player.id}
           playerInfo={player}
           isRight={index % 2 === 1}
+          isTimerRunning={currentMove === player.symbol}
         />
       ))}
     </div>
   );
 }
 
-function PlayerInfo({ playerInfo, isRight }) {
+function PlayerInfo({ playerInfo, isRight, isTimerRunning }) {
+  const [seconds, setSeconds] = useState(60);
 
-  const [seconds, setSeconds] = useState(6);
+  const minutesString = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const secondsString = String(seconds % 60).padStart(2, "0");
 
-  const minutesString =  String(Math.floor(seconds / 60)).padStart(2, "0");
-  const secondsString = String(seconds % 60).padStart(2, "0")
-  const isDanges = seconds < 10;
+  const isDanger = seconds < 10;
 
   useEffect(() => {
-    setInterval(() => {
-        setSeconds((s) => Math.max(s - 1, 0))
-    }, 1000)
-  }, [])
+    if (isTimerRunning) {
+      const interval = setInterval(() => {
+        setSeconds((s) => Math.max(s - 1, 0));
+      }, 1000);
+
+      return () => {
+        clearInterval(interval);
+        setSeconds(60);
+      };
+    }
+  }, [isTimerRunning]);
+
+  const getTimerColor = () => {
+    if (isTimerRunning) {
+      return isDanger ? "text-orange-600" : "text-slate-900";
+    }
+    return "text-slate-200";
+  };
 
   return (
     <div className="flex gap-3 items-center">
@@ -65,9 +104,9 @@ function PlayerInfo({ playerInfo, isRight }) {
       <div className={clsx("h-6 w-px bg-slate-200", isRight && "order-2")} />
       <div
         className={clsx(
-          "text-lg font-semibold",
+          " text-lg font-semibold w-[60px]",
           isRight && "order-1",
-          isDanges ? 'text-orange-600 ' : 'text-slate-900 '
+          getTimerColor()
         )}
       >
         {minutesString}:{secondsString}
