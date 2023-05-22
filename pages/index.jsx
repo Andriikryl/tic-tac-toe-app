@@ -9,7 +9,7 @@ import { Header } from "../components/header";
 
 export default function HomePage() {
   const [playersCount] = useState(2);
-  const { cells, currentMove, handleCellClick, nextMove, winnerSequence } =
+  const { cells, currentMove, handleCellClick, nextMove, winnerSequence, handlePlayerTimeOver } =
     useGameState(playersCount);
 
   return (
@@ -22,6 +22,7 @@ export default function HomePage() {
           className="mt-4 "
           currentMove={currentMove}
           isWinner={!!winnerSequence}
+          onPlayerTimeOver={handlePlayerTimeOver}
         />
         <GameField
           className="mt-6"
