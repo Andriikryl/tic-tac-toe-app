@@ -7,6 +7,8 @@ import {
 } from "../components/game";
 import { Header } from "../components/header";
 import { GameSymbol } from "../components/game/game-symbol";
+import { UiModal } from "../components/uikit/ui-modal";
+import { UiButton } from "../components/uikit/ui-button";
 
 export default function HomePage() {
   const [playersCount] = useState(2);
@@ -28,6 +30,21 @@ export default function HomePage() {
         {winnerSymbol && (
         <div className="my-4"><GameSymbol symbol={winnerSymbol}/></div>
         )}
+        <UiModal width="md" isOpen={winnerSymbol} onClose={() => console.log("close")}>
+          <UiModal.Header>Game over!</UiModal.Header>
+          <UiModal.Body>
+            <div className="text-sm">  
+            Winner:
+            <span className="text-teal-600">
+              Antonio
+            </span>
+            </div>
+          </UiModal.Body>
+          <UiModal.Footer>
+            <UiButton size="md" variant="outline">Back</UiButton>
+            <UiButton size="md" variant="outline">Play againe</UiButton>
+          </UiModal.Footer>
+        </UiModal>
         <GameField
           className="mt-6"
           cells={cells}
