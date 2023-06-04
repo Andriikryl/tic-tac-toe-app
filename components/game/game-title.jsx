@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "./icons/arrow-left-icon";
 import { StarIcon } from "./icons/star-icon";
 import { UserIcon } from "./icons/user-icon";
-import { HistoryIcon } from "./icons/history-icon";
+import { HistoryIcon } from "./icons/histry-icon";
 
 export function GameTitle({ playersCount }) {
   return (
